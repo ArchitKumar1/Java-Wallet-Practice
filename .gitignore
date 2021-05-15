@@ -1,0 +1,17 @@
+
+*.class
+
+*.DS_Store
+
+# Package Files #
+*.war
+*.ear
+
+.gradle/
+.idea/*
+build/
+classes/
+out/
+
+
+temp

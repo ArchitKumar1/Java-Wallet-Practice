@@ -1,0 +1,11 @@
+add archit raha anjali
+transact archit raha 100
+transact archit raha 400
+transact raha archit 500
+status archit raha anjali
+transact anjali raha 100
+transact raha anjali 200
+transact raha archit 300
+status archit raha anjali
+top
+remove archit raha anjali
