@@ -1,2 +1,13 @@
-package PACKAGE_NAME;public class Config {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Config {
+    public RedisConfig redisConfig;
+
 }

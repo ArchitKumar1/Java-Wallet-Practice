@@ -9,6 +9,16 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        setup();
+        run();
+    }
+
+    private static void setup() {
+        Setup setupJob = new Setup();
+        setupJob.run();
+    }
+
+    private static void run() throws IOException {
         Iservice service = new Service();
         Scanner sc = new Scanner(System.in);
         String str;
@@ -17,42 +27,66 @@ public class Main {
         File file = new File(url.getPath());
         BufferedReader br = new BufferedReader(new FileReader(file));
 
+        label:
         while ((str = br.readLine()) != null) {
 //        while (true) {
 //            str = sc.nextLine();
             System.out.println(str);
             String[] command = str.split(" ");
             List<String> commandList = Arrays.asList(command);
-            if (command[0].equals("add")) {
-                List<String> names = commandList.subList(1, commandList.size());
-                service.addPersons(names);
-            } else if (command[0].equals("remove")) {
-                List<String> names = commandList.subList(1, commandList.size());
-                service.removePersons(names);
-            } else if (command[0].equals("transact")) {
-                try {
-                    service.transact(command[1], command[2], Integer.parseInt(command[3]));
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+            switch (command[0]) {
+                case "setpassword": {
+                    String name = commandList.get(1);
+                    String password = commandList.get(2);
+                    service.addPassword(name,password);
+                    break;
                 }
-            } else if (command[0].equals("status")) {
+                case "getpassword": {
+                    String name = commandList.get(1);
+                    String password = service.getPassword(name);
+                    System.out.println(password);
+                    break;
+                }
 
-                try {
+                case "add": {
                     List<String> names = commandList.subList(1, commandList.size());
-                    List<Person> persons = service.getPersons(names);
-                    for (Person person : persons) {
-                        System.out.println(person);
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    service.addPersons(names);
+                    break;
                 }
 
-            } else if (command[0].equals("top")) {
-                System.out.println(service.getTopCustomer());
-            } else if (command[0].equals("exit")) {
-                break;
-            } else {
-                System.out.println("Try again");
+                case "remove": {
+                    List<String> names = commandList.subList(1, commandList.size());
+                    service.removePersons(names);
+                    break;
+                }
+                case "transact":
+                    try {
+                        service.transact(command[1], command[2], Integer.parseInt(command[3]));
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case "status":
+
+                    try {
+                        List<String> names = commandList.subList(1, commandList.size());
+                        List<Person> persons = service.getPersons(names);
+                        for (Person person : persons) {
+                            System.out.println(person);
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                    break;
+                case "top":
+                    System.out.println(service.getTopCustomer());
+                    break;
+                case "exit":
+                    break label;
+                default:
+                    System.out.println("Try again");
+                    break;
             }
         }
     }

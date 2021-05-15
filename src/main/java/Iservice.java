@@ -12,4 +12,9 @@ public interface Iservice {
 
     Person getTopCustomer();
 
+    void addPassword(String name, String password);
+
+    String getPassword(String name);
+
+
 }

@@ -2,12 +2,20 @@ import java.util.*;
 
 public class Service implements Iservice {
     Map<String, Person> personMap;
-
     TreeSet<Person> personSet;
+    RedisClient redisClient = new RedisClient();
 
     Service() {
         personMap = new HashMap<>();
         personSet = new TreeSet<>();
+    }
+
+    public void addPassword(String name, String password) {
+        redisClient.set(name, password);
+    }
+
+    public String getPassword(String name) {
+        return redisClient.get(name);
     }
 
     public void addPersons(List<String> names) {
