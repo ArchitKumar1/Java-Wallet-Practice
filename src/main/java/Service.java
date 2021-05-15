@@ -17,10 +17,18 @@ public class Service implements Iservice {
     }
 
     private void addPerson(String name) {
-        Wallet wallet = Wallet.builder().money(1000).noOfTransactions(0).build();
-        Person person = Person.builder().name(name).wallet(wallet).build();
+        Wallet wallet = getWallet();
+        Person person = getPerson(name, wallet);
         personMap.put(person.getName(), person);
         log("Person " + name + " added");
+    }
+
+    private Person getPerson(String name, Wallet wallet) {
+        return Person.builder().name(name).wallet(wallet).build();
+    }
+
+    private Wallet getWallet() {
+        return Wallet.builder().money(1000).noOfTransactions(0).build();
     }
 
     public void removePersons(List<String> names) {
@@ -52,8 +60,8 @@ public class Service implements Iservice {
     private void processTransaction(Transaction transaction) throws PersonNotFoundException {
         Person sender = getPersonFromName(transaction.getSendersName());
         Person reciever = getPersonFromName(transaction.getReceiversName());
-        removeFromSet(sender);
 
+        removeFromSet(sender);
         removeFromSet(reciever);
 
         int amount = transaction.getAmount();
@@ -63,7 +71,7 @@ public class Service implements Iservice {
 
         addToSet(sender);
         addToSet(reciever);
-        log("Transaction completed successfully");
+        log("Sent " + amount + " from " + sender.getName() + " to " + reciever.getName() + " successfully");
     }
 
     private void removeFromSet(Person person) {
