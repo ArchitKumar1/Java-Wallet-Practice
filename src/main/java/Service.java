@@ -33,7 +33,6 @@ public class Service implements Iservice {
     private void processTransaction(Transaction transaction) throws PersonNotFoundException {
         Person sender = getPersonFromName(transaction.getSendersName());
         Person reciever = getPersonFromName(transaction.getReceiversName());
-
         personService.removeFromSet(sender);
         personService.removeFromSet(reciever);
 
