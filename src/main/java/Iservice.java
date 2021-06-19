@@ -11,10 +11,4 @@ public interface Iservice {
     void transact(String sender, String reciever, int amount) throws NotEnoughBalanceException, PersonNotFoundException;
 
     Person getTopCustomer();
-
-    void addPassword(String name, String password);
-
-    String getPassword(String name);
-
-
 }

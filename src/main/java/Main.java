@@ -8,7 +8,6 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-
         setup();
         run();
     }
@@ -19,7 +18,7 @@ public class Main {
     }
 
     private static void run() throws IOException {
-        Iservice service = new Service();
+        Iservice service = getIservice();
         Scanner sc = new Scanner(System.in);
         String str;
 
@@ -35,18 +34,18 @@ public class Main {
             String[] command = str.split(" ");
             List<String> commandList = Arrays.asList(command);
             switch (command[0]) {
-                case "setpassword": {
-                    String name = commandList.get(1);
-                    String password = commandList.get(2);
-                    service.addPassword(name,password);
-                    break;
-                }
-                case "getpassword": {
-                    String name = commandList.get(1);
-                    String password = service.getPassword(name);
-                    System.out.println(password);
-                    break;
-                }
+//                case "setpassword": {
+//                    String name = commandList.get(1);
+//                    String password = commandList.get(2);
+//                    service.addPassword(name,password);
+//                    break;
+//                }
+//                case "getpassword": {
+//                    String name = commandList.get(1);
+//                    String password = service.getPassword(name);
+//                    System.out.println(password);
+//                    break;
+//                }
 
                 case "add": {
                     List<String> names = commandList.subList(1, commandList.size());
@@ -89,5 +88,9 @@ public class Main {
                     break;
             }
         }
+    }
+
+    private static Iservice getIservice() {
+        return new Service(new PersonService(new PersonDao()));
     }
 }

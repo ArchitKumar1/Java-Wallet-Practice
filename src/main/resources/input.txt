@@ -1,5 +1,3 @@
-setpassword a 1
-getpassword a
 add archit raha anjali
 transact archit raha 100
 transact archit raha 400
