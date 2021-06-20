@@ -1,6 +1,8 @@
+package com.application.exceptions;
+
 public class NotEnoughBalanceException
         extends Exception {
-    NotEnoughBalanceException(String s ) {
+    public NotEnoughBalanceException(String s) {
         super(s);
     }
 }

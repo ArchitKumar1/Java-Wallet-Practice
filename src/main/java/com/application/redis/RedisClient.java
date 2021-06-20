@@ -1,3 +1,6 @@
+package com.application.redis;
+
+import com.application.JedisFactory;
 import redis.clients.jedis.Jedis;
 
 public class RedisClient {

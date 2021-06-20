@@ -1,3 +1,7 @@
+package com.application.person;
+
+import com.application.exceptions.PersonNotFoundException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -31,10 +35,6 @@ public class PersonDao {
 
     public Person getTopCustomer() {
         return personSet.first();
-    }
-
-    public boolean containsPerson(String name) {
-        return personMap.containsKey(name);
     }
 
     public void removeFromSet(Person person) {

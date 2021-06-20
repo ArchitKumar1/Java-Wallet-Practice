@@ -1,3 +1,9 @@
+package com.application;
+
+import com.application.config.Config;
+import com.application.config.ConfigFactory;
+import com.application.config.RedisConfig;
+
 public class Setup {
 
     public void run() {

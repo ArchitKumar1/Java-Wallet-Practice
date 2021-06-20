@@ -1,3 +1,5 @@
+package com.application.config;
+
 public class ConfigFactory {
     private static Config configObject;
 

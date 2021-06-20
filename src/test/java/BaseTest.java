@@ -1,3 +1,5 @@
+import com.application.person.Person;
+import com.application.Wallet;
 import org.junit.BeforeClass;
 
 public class BaseTest {

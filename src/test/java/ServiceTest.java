@@ -1,3 +1,4 @@
+import com.application.Service;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 

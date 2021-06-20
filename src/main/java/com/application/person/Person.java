@@ -1,3 +1,6 @@
+package com.application.person;
+
+import com.application.Wallet;
 import lombok.*;
 
 @Getter

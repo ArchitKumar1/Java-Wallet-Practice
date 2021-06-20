@@ -1,3 +1,9 @@
+package com.application.person;
+
+import com.application.exceptions.PersonNotFoundException;
+import com.application.Wallet;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonService {
@@ -38,13 +44,16 @@ public class PersonService {
     public Person getPerson(String name) throws PersonNotFoundException {
         return personDao.getPerson(name);
     }
+    public List<Person> getPersons(List<String> names) throws PersonNotFoundException {
+        List<Person> personList = new ArrayList<>();
+        for (String name : names) {
+            personList.add(getPerson(name));
+        }
+        return personList;
+    }
 
     public Person getTopCustomer() {
         return personDao.getTopCustomer();
-    }
-
-    public boolean containsPerson(String name) {
-        return personDao.containsPerson(name);
     }
 
     public void removeFromSet(Person person) {
