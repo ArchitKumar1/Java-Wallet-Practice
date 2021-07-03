@@ -1,27 +1,29 @@
 package com.application;
 
-import java.io.BufferedReader;
+import fi.iki.elonen.NanoHTTPD;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
-
+@Slf4j
 public class Main {
+    private static final int PORT = 8082;
 
     public static void main(String[] args) throws IOException {
-        // setup();
-        run();
+        // run();
+        runHttp();
     }
 
-    private static void setup() {
-        Setup setupJob = new Setup();
-        setupJob.run();
+    private static void runHttp() throws IOException {
+        WebServer webServer = new WebServer(PORT);
+        webServer.start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+
     }
 
-    private static void run() throws IOException {
-        Iservice service = Service.getInstance();
+    private static void run() throws Exception {
+        Iservice service = new Service();
         File file = new File("src/main/java/com/application/input.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        service.run(br);
+        service.run(file);
     }
 }

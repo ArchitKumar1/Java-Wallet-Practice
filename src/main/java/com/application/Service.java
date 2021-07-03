@@ -7,25 +7,18 @@ import com.application.person.PersonDao;
 import com.application.person.PersonService;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class Service implements Iservice {
+public class Service implements Iservice, ServiceRunner {
 
-    public static Service INSTANCE;
     private final PersonService personService;
 
-    public Service(PersonService personService) {
-        this.personService = personService;
-    }
-
-    public static synchronized Service getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Service(new PersonService(new PersonDao()));
-        }
-        return INSTANCE;
+    public Service() {
+        this.personService = new PersonService(new PersonDao());
     }
 
     private void processTransaction(Transaction transaction) throws PersonNotFoundException {
@@ -73,55 +66,46 @@ public class Service implements Iservice {
         System.out.println(message);
     }
 
-    public void run(BufferedReader br) throws IOException {
+    public void run(File file) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(file));
         String str;
-        label:
         while ((str = br.readLine()) != null) {
             System.out.println(str);
-            String[] command = str.split(" ");
-            List<String> commandList = Arrays.asList(command);
-            switch (command[0]) {
-                case "add": {
-                    List<String> names = commandList.subList(1, commandList.size());
-                    personService.addPersons(names);
-                    break;
-                }
-
-                case "remove": {
-                    List<String> names = commandList.subList(1, commandList.size());
-                    personService.removePersons(names);
-                    break;
-                }
-                case "transact":
-                    try {
-                        transact(command[1], command[2], Integer.parseInt(command[3]));
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                case "status":
-                    try {
-                        List<String> names = commandList.subList(1, commandList.size());
-                        List<Person> persons = personService.getPersons(names);
-                        for (Person person : persons) {
-                            System.out.println(person);
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-
-                    break;
-                case "top":
-                    System.out.println(personService.getTopCustomer());
-                    break;
-                case "exit":
-                    break label;
-                default:
-                    System.out.println("Try again");
-                    break;
-            }
+            processCommand(str);
         }
     }
 
-
+    public void processCommand(String command) throws Exception {
+        String[] commandWords = command.split(" ");
+        List<String> commandList = Arrays.asList(commandWords);
+        switch (commandWords[0]) {
+            case "add": {
+                List<String> names = commandList.subList(1, commandList.size());
+                personService.addPersons(names);
+                break;
+            }
+            case "remove": {
+                List<String> names = commandList.subList(1, commandList.size());
+                personService.removePersons(names);
+                break;
+            }
+            case "transact":
+                transact(commandWords[1], commandWords[2], Integer.parseInt(commandWords[3]));
+                break;
+            case "status":
+                List<String> names = commandList.subList(1, commandList.size());
+                List<Person> persons = personService.getPersons(names);
+                for (Person person : persons) {
+                    System.out.println(person);
+                }
+                break;
+            case "top":
+                System.out.println(personService.getTopCustomer());
+                break;
+            case "exit":
+                break;
+            default:
+                throw new Exception(" Invalid Command  " + command);
+        }
+    }
 }
