@@ -1,15 +1,13 @@
 package com.application;
 
 import fi.iki.elonen.NanoHTTPD;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
 
-@Slf4j
-public class Main {
-    private static final int PORT = 8082;
 
+public class Main {
+    private static final int PORT = 8000;
     public static void main(String[] args) throws IOException {
         // run();
         runHttp();

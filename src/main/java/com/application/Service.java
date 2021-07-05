@@ -23,18 +23,19 @@ public class Service implements Iservice, ServiceRunner {
 
     private void processTransaction(Transaction transaction) throws PersonNotFoundException {
         Person sender = personService.getPerson(transaction.getSendersName());
-        Person reciever = personService.getPerson(transaction.getReceiversName());
+        Person receiver = personService.getPerson(transaction.getReceiversName());
         personService.removeFromSet(sender);
-        personService.removeFromSet(reciever);
+        personService.removeFromSet(receiver);
 
         int amount = transaction.getAmount();
 
         sender.getWallet().updateMoney(amount, PersonType.SENDER);
-        reciever.getWallet().updateMoney(amount, PersonType.RECEIVER);
+        receiver.getWallet().updateMoney(amount, PersonType.RECEIVER);
 
         personService.addToSet(sender);
-        personService.addToSet(reciever);
-        log("Sent " + amount + " from " + sender.getName() + " to " + reciever.getName() + " successfully");
+        personService.addToSet(receiver);
+        log("Sent " + amount + " from " + sender.getName() + " to " + receiver.getName() + " successfully");
+        PrometheusUtils.getTransactionCounter().labels("metric").inc();
     }
 
 
@@ -45,10 +46,10 @@ public class Service implements Iservice, ServiceRunner {
         processTransaction(transaction);
     }
 
-    private Transaction createTransaction(String sender, String reciever, int amount) {
+    private Transaction createTransaction(String sender, String receiver, int amount) {
         return Transaction.builder()
                 .amount(amount)
-                .receiversName(reciever)
+                .receiversName(receiver)
                 .sendersName(sender)
                 .build();
     }
