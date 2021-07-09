@@ -52,6 +52,17 @@ task fatJar(type: Jar) {
     }
     with jar
 }
+
+ext {
+    javaMainClass = 'com.application.Main'
+}
+task runWithExecJarExecutable(type: Exec) {
+    dependsOn fatJar
+    group = 'Execution'
+    description = 'Run the main jar of the project'
+    commandLine "java", "-classpath", fatJar.archiveFile.get(), javaMainClass
+}
+
 abstract class GreetingTask extends DefaultTask {
     @TaskAction
     def greet() {
@@ -59,6 +70,13 @@ abstract class GreetingTask extends DefaultTask {
     }
 }
 
+abstract class RunProjectTask extends DefaultTask {
+    @TaskAction
+    def runProject() {
+        println 'hello from RunProjectTask'
+    }
+}
 // Create a task using the task type
 tasks.register('hello', GreetingTask)
+tasks.register('runProject', RunProjectTask)
 
