@@ -23,5 +23,7 @@ public interface IPersonService {
 
     void removeFromSet(Person person);
 
+    void removeFromSet(Person ... person);
+
     void addToSet(Person person);
 }

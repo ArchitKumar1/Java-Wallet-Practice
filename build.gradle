@@ -33,7 +33,11 @@ dependencies {
     testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '1.7.4'
     testCompile "org.powermock:powermock-module-junit4:1.6.4"
 
+    compile group: 'io.prometheus', name: 'simpleclient_guava', version: '0.2.0'
     compile group: 'io.prometheus', name: 'simpleclient', version: '0.1.0'
+    compile group: 'io.prometheus', name: 'simpleclient_hotspot', version: '0.1.0'
+    compile group: 'io.prometheus', name: 'simpleclient_httpserver', version: '0.1.0'
+    compile group: 'io.prometheus', name: 'simpleclient_pushgateway', version: '0.1.0'
 }
 
 

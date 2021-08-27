@@ -70,6 +70,13 @@ public class PersonService implements IPersonService {
     }
 
     @Override
+    public void removeFromSet(Person... persons) {
+        for (Person person : persons) {
+            removeFromSet(person);
+        }
+    }
+
+    @Override
     public void addToSet(Person person) {
         personDao.addToSet(person);
     }

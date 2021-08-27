@@ -12,4 +12,4 @@ scrape_configs:
   - job_name: project1
     static_configs:
       # target for jmx exporter
-      - targets: [ 'docker.for.mac.localhost:8080' ]
+      - targets: [ 'host.docker.internal:8000' ]

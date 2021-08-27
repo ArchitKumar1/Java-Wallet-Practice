@@ -24,24 +24,22 @@ public class Service implements Iservice, ServiceRunner {
     private void processTransaction(Transaction transaction) throws PersonNotFoundException {
         Person sender = personService.getPerson(transaction.getSendersName());
         Person receiver = personService.getPerson(transaction.getReceiversName());
-        personService.removeFromSet(sender);
-        personService.removeFromSet(receiver);
+        personService.removeFromSet(sender,receiver);
 
         int amount = transaction.getAmount();
 
-        sender.getWallet().updateMoney(amount, PersonType.SENDER);
-        receiver.getWallet().updateMoney(amount, PersonType.RECEIVER);
+        sender.getWallet().updateMoney(amount, PersonType.SENDER, sender);
+        receiver.getWallet().updateMoney(amount, PersonType.RECEIVER, receiver);
 
         personService.addToSet(sender);
         personService.addToSet(receiver);
         log("Sent " + amount + " from " + sender.getName() + " to " + receiver.getName() + " successfully");
-        PrometheusUtils.getTransactionCounter().labels("metric").inc();
     }
 
 
-    public void transact(String sender, String reciever, int amount) throws NotEnoughBalanceException,
+    public void transact(String sender, String receiver, int amount) throws NotEnoughBalanceException,
                                                                             PersonNotFoundException {
-        Transaction transaction = createTransaction(sender, reciever, amount);
+        Transaction transaction = createTransaction(sender, receiver, amount);
         validateTransaction(transaction);
         processTransaction(transaction);
     }

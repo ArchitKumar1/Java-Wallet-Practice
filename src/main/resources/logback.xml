@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <appender name="rollingFileAppender"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <file>/var/log/batching.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/batching.%d{yyyy-MM-dd_HH}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>720</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date{YYYY-MM-dd HH:mm:ss} [%X{requestId}] %level [%thread] %logger{10} [%file:%line] %msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="practice" level="debug"/>
+
+    <root level="info">
+        <appender-ref ref="rollingFileAppender"/>
+    </root>
+
+</configuration>

@@ -2,6 +2,7 @@ package com.application;
 
 
 import io.prometheus.client.Counter;
+import io.prometheus.client.Gauge;
 
 public class PrometheusUtils {
 
@@ -12,16 +13,28 @@ public class PrometheusUtils {
 
     private static final Counter transactionCounter;
 
+    private static final Gauge moneyGuage;
+
 
     static {
         transactionCounter = Counter
                 .build("transaction_count", "Transaction Counts")
-                .labelNames("metric")
+                .labelNames("person")
                 .register();
-
     }
 
-    public static Counter getTransactionCounter(){
+    static {
+        moneyGuage = Gauge
+                .build("money_count", "Live Money")
+                .labelNames("person")
+                .register();
+    }
+
+    public static Counter getTransactionCounter() {
         return transactionCounter;
+    }
+
+    public static Gauge getMoneyGuage() {
+        return moneyGuage;
     }
 }

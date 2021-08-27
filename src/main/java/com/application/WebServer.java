@@ -1,13 +1,18 @@
 package com.application;
 
 import fi.iki.elonen.NanoHTTPD;
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.common.TextFormat;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class WebServer extends NanoHTTPD {
@@ -27,6 +32,7 @@ public class WebServer extends NanoHTTPD {
 
     /**
      * Constructs an HTTP server on given hostname and port.
+     * d
      *
      * @param hostname
      * @param port
@@ -42,11 +48,10 @@ public class WebServer extends NanoHTTPD {
         try {
             URI uri = new URI(session.getUri());
             String path = uri.getPath();
-
             if (session.getMethod() == Method.POST) {
                 return handlePostRequest(session, path);
             } else if (session.getMethod() == Method.GET) {
-                handleGetRequest();
+                return handleGetRequest(session, path);
             }
             return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT,
                     "BAD_REQUEST");
@@ -56,7 +61,12 @@ public class WebServer extends NanoHTTPD {
         }
     }
 
-    private void handleGetRequest() {
+    private Response handleGetRequest(IHTTPSession session, String path) {
+        if (path.equals("/metrics")) {
+            return exportMetrics();
+        }
+        return newFixedLengthResponse(Response.Status.METHOD_NOT_ALLOWED, MIME_PLAINTEXT,
+                "Method Not Allowed");
     }
 
     private Response handlePostRequest(IHTTPSession session, String path) throws Exception {
@@ -72,6 +82,16 @@ public class WebServer extends NanoHTTPD {
         }
         return newFixedLengthResponse(Response.Status.METHOD_NOT_ALLOWED, MIME_PLAINTEXT,
                 "Method Not Allowed");
+    }
+
+    private Response exportMetrics() {
+        Writer writer = new StringWriter();
+        try {
+            TextFormat.write004(writer, CollectorRegistry.defaultRegistry.filteredMetricFamilySamples(new HashSet<>()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, writer.toString());
     }
 
     private Response processCommands(String postData) throws Exception {
