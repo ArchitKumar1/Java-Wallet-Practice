@@ -4,6 +4,7 @@ import fi.iki.elonen.NanoHTTPD;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.exporter.common.TextFormat;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -80,8 +81,32 @@ public class WebServer extends NanoHTTPD {
         if (path.equals("/commands")) {
             return processCommands(postData);
         }
+        if (path.equals("/set")) {
+            return set(postData);
+        }
+        if (path.equals("/get")) {
+            return get(postData);
+        }
         return newFixedLengthResponse(Response.Status.METHOD_NOT_ALLOWED, MIME_PLAINTEXT,
                 "Method Not Allowed");
+    }
+
+    private Response get(String postData) throws JSONException {
+        JSONObject jsonObject = new JSONObject(postData);
+
+        String key = jsonObject.getString("key");
+        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, serviceRunner.get(key));
+    }
+
+    private Response set(String postData) throws JSONException {
+
+        JSONObject jsonObject = new JSONObject(postData);
+
+        String key = jsonObject.getString("key");
+        String value = jsonObject.getString("value");
+
+        serviceRunner.set(key, value);
+        return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, "OK");
     }
 
     private Response exportMetrics() {

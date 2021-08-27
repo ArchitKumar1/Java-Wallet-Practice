@@ -2,21 +2,24 @@ package com.application;
 
 import redis.clients.jedis.Jedis;
 
+import static com.application.Constants.LOCALHOST;
+import static com.application.Constants.REDIS_PORT;
+
 
 public class JedisFactory {
     private static final JedisFactory instance = new JedisFactory();
-    private static Jedis jedisPool;
+    private static Jedis jedis;
 
 
     private JedisFactory() {
-        jedisPool = new Jedis();
+
+        jedis = new Jedis(LOCALHOST,REDIS_PORT);
     }
 
     public static JedisFactory getInstance() {
         return instance;
     }
-
-    public Jedis getJedisPool() {
-        return jedisPool;
+    public Jedis getJedis(){
+        return jedis;
     }
 }

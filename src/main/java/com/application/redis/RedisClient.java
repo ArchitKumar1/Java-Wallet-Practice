@@ -18,10 +18,10 @@ public class RedisClient {
     }
 
     private Jedis getWriteJedis() {
-        return JedisFactory.getInstance().getJedisPool();
+        return JedisFactory.getInstance().getJedis();
     }
 
     private Jedis getReadJedis() {
-        return JedisFactory.getInstance().getJedisPool();
+        return JedisFactory.getInstance().getJedis();
     }
 }

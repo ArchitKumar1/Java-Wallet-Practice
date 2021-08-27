@@ -5,6 +5,7 @@ import com.application.exceptions.PersonNotFoundException;
 import com.application.person.Person;
 import com.application.person.PersonDao;
 import com.application.person.PersonService;
+import com.application.redis.RedisClient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -106,5 +107,15 @@ public class Service implements Iservice, ServiceRunner {
             default:
                 throw new Exception(" Invalid Command  " + command);
         }
+    }
+
+    public void set(String key, String value) {
+        RedisClient redisClient = new RedisClient();
+        redisClient.set(key, value);
+    }
+
+    public String get(String key) {
+        RedisClient redisClient = new RedisClient();
+        return redisClient.get(key);
     }
 }

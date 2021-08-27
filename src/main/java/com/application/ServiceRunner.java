@@ -18,4 +18,8 @@ public interface ServiceRunner {
     }
 
     void processCommand(String command) throws Exception;
+
+    String get(String key);
+
+    void set(String key, String value);
 }

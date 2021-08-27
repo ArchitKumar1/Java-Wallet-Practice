@@ -1,15 +1,16 @@
 global:
-  scrape_interval: 2s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 2s
+  scrape_interval: 1s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 1s
   external_labels:
     monitor: 'my-monitor'
 
 scrape_configs:
   - job_name: prometheus
     static_configs:
+      #Own metrics
       - targets: [ 'localhost:9090' ]
 
   - job_name: project1
     static_configs:
-      # target for jmx exporter
+       #Own java app metrics
       - targets: [ 'host.docker.internal:8000' ]
