@@ -1,5 +1,6 @@
 package com.application;
 
+import com.newrelic.api.agent.Trace;
 import fi.iki.elonen.NanoHTTPD;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.exporter.common.TextFormat;
@@ -119,6 +120,7 @@ public class WebServer extends NanoHTTPD {
         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, writer.toString());
     }
 
+    @Trace(metricName = "process commands", dispatcher = true)
     private Response processCommands(String postData) throws Exception {
         JSONObject jsonObject = new JSONObject(postData);
 
