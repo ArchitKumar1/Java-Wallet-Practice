@@ -6,6 +6,7 @@ import com.application.person.Person;
 import com.application.person.PersonDao;
 import com.application.person.PersonService;
 import com.application.redis.RedisClient;
+import com.newrelic.api.agent.Trace;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -75,6 +76,7 @@ public class Service implements Iservice, ServiceRunner {
         }
     }
 
+    @Trace(metricName = "processCommand",dispatcher = true)
     public void processCommand(String command) throws Exception {
         String[] commandWords = command.split(" ");
         List<String> commandList = Arrays.asList(commandWords);

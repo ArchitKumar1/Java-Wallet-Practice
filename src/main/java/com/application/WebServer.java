@@ -92,6 +92,7 @@ public class WebServer extends NanoHTTPD {
                 "Method Not Allowed");
     }
 
+    @Trace(metricName = "RedisGet", dispatcher = true)
     private Response get(String postData) throws JSONException {
         JSONObject jsonObject = new JSONObject(postData);
 
@@ -99,6 +100,7 @@ public class WebServer extends NanoHTTPD {
         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, serviceRunner.get(key));
     }
 
+    @Trace(metricName = "RedisSet", dispatcher = true)
     private Response set(String postData) throws JSONException {
 
         JSONObject jsonObject = new JSONObject(postData);
@@ -110,6 +112,7 @@ public class WebServer extends NanoHTTPD {
         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, "OK");
     }
 
+    @Trace(metricName = "exportMetrics", dispatcher = true)
     private Response exportMetrics() {
         Writer writer = new StringWriter();
         try {
@@ -120,7 +123,7 @@ public class WebServer extends NanoHTTPD {
         return newFixedLengthResponse(Response.Status.OK, MIME_PLAINTEXT, writer.toString());
     }
 
-    @Trace(metricName = "process commands", dispatcher = true)
+    @Trace(metricName = "processCommands", dispatcher = true)
     private Response processCommands(String postData) throws Exception {
         JSONObject jsonObject = new JSONObject(postData);
 

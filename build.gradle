@@ -44,6 +44,12 @@ dependencies {
 
     compile group: 'io.grpc', name: 'grpc-all', version: '1.19.0'
 
+    compile 'org.hibernate:hibernate-core:4.3.6.Final'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile 'org.javassist:javassist:3.15.0-GA'
+    compile 'mysql:mysql-connector-java:5.1.31'
+
 //    // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 //    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.11.1'
 //    compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.11.1'

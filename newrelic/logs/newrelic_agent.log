@@ -1,0 +1,43 @@
+2021-10-03T06:06:51,574+0530 [12931 1] com.newrelic INFO: Writing to New Relic log file: /Users/archit.kumar/Desktop/practice-2/newrelic/logs/newrelic_agent.log
+2021-10-03T06:06:51,574+0530 [12931 1] com.newrelic INFO: JRE vendor Amazon.com Inc. version 1.8.0_282
+2021-10-03T06:06:51,574+0530 [12931 1] com.newrelic INFO: JVM vendor Amazon.com Inc. OpenJDK 64-Bit Server VM version 25.282-b08
+2021-10-03T06:06:51,575+0530 [12931 1] com.newrelic INFO: OS Mac OS X version 10.15.7 arch x86_64
+2021-10-03T06:06:51,575+0530 [12931 1] com.newrelic INFO: Agent Host: SW-LP10 IP: 192.168.29.216
+2021-10-03T06:06:51,575+0530 [12931 1] com.newrelic INFO: New Relic Agent v7.1.1 is initializing...
+2021-10-03T06:06:52,419+0530 [12931 8] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2021-10-03T06:06:54,418+0530 [12931 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2021-10-03T06:06:54,985+0530 [12931 1] com.newrelic INFO: Setting audit_mode to false
+2021-10-03T06:06:55,314+0530 [12931 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/archit.kumar/Desktop/practice-2/newrelic/./newrelic.yml
+2021-10-03T06:06:55,329+0530 [12931 1] com.newrelic INFO: New Relic Agent v7.1.1 has started
+2021-10-03T06:06:55,329+0530 [12931 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5fcfe4b2
+2021-10-03T06:06:55,330+0530 [12931 1] com.newrelic INFO: Premain startup complete in 4,739ms
+2021-10-03T06:08:55,339+0530 [12931 31] com.newrelic INFO: Host name is SW-LP10, display host SW-LP10 for application practice-2
+2021-10-03T06:08:55,342+0530 [12931 31] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2021-10-03T06:08:56,914+0530 [12931 31] com.newrelic INFO: Collector redirection to collector-004.newrelic.com:443
+2021-10-03T06:08:57,708+0530 [12931 31] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2021-10-03T06:08:57,709+0530 [12931 31] com.newrelic INFO: Agent run id: BTVUAFC5RfJuADIG7Ton6AZhWPvgAAIBAAAnIQEAADKDAgQ_7X0BAwAFNy4xLjEAB1NXLUxQMTAACnByYWN0aWNlLTI
+2021-10-03T06:08:57,709+0530 [12931 31] com.newrelic INFO: Agent 12931@SW-LP10/practice-2 connected to collector.newrelic.com:443
+2021-10-03T06:08:57,709+0530 [12931 31] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3278573/applications/1072528641
+2021-10-03T06:08:57,710+0530 [12931 31] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:08:57,711+0530 [12931 31] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:08:57,711+0530 [12931 31] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T06:08:57,713+0530 [12931 31] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:08:57,713+0530 [12931 31] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:08:57,714+0530 [12931 31] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T06:08:57,741+0530 [12931 31] com.newrelic INFO: Real user monitoring is enabled for application practice-2. Auto instrumentation is enabled.
+2021-10-03T06:08:57,746+0530 [12931 31] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2021-10-03T06:25:30,829+0530 [12931 109] com.newrelic INFO: Re-reading New Relic configuration file
+2021-10-03T06:25:30,867+0530 [12931 109] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:25:30,867+0530 [12931 109] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:25:30,867+0530 [12931 109] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T06:25:30,878+0530 [12931 109] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:25:30,878+0530 [12931 109] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:25:30,878+0530 [12931 109] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T06:25:30,892+0530 [12931 109] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:25:30,897+0530 [12931 109] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:25:30,897+0530 [12931 109] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T06:25:30,903+0530 [12931 109] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2021-10-03T06:25:30,903+0530 [12931 109] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2021-10-03T06:25:30,904+0530 [12931 109] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2021-10-03T07:51:00,461+0530 [12931 6] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2021-10-03T07:51:01,202+0530 [12931 6] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
