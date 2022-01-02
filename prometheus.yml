@@ -13,4 +13,4 @@ scrape_configs:
   - job_name: project1
     static_configs:
        #Own java app metrics
-      - targets: [ 'host.docker.internal:8000' ]
+      - targets: [ 'practice-2:8000' ]

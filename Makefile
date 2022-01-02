@@ -13,3 +13,7 @@ restart:
 restart_with_recreate:
 	make down
 	make recreate_up
+
+
+access-container:
+	docker exec -it d054031b1b67 /bin/sh

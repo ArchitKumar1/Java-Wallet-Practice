@@ -16,6 +16,7 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /tmp/prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
 
@@ -28,7 +29,8 @@ services:
       - 3001:3000
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasource.yml
-#      -  grafana-storage:grafana/grafana
+      #     -  grafana-storage:grafana/grafana
+      - grafanadata:/var/lib/grafana
     env_file:
       - ./config.monitoring
 
@@ -39,7 +41,7 @@ services:
 
   db:
     container_name: mysql
-    image : mysql
+    image: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -78,3 +80,6 @@ services:
 #volumes:
 #  grafana-storage:
 #    driver: local
+
+volumes:
+  grafanadata:
