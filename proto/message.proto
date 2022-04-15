@@ -1,7 +1,7 @@
 syntax = "proto3";
 package grpcexample;
 
-option java_package = "io.grpc.examples";
+option java_package = "com.application.genproto";
 option java_multiple_files = true;
 
 // The greeter service definition.
@@ -16,6 +16,7 @@ service Greeter {
 // The request message containing the user's name.
 message HelloRequest {
   string name = 1;
+  int32 age = 2;
 }
 
 // The response message containing the greetings
