@@ -1,5 +1,5 @@
 package practice.grpc;
 
 public interface ServerConstants {
-    int PORT = 9001;
+    int PORT = 8100;
 }

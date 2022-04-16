@@ -1,5 +1,6 @@
 package practice.grpc;
 
+import com.application.PrometheusUtils;
 import com.application.genproto.GreeterGrpc;
 import com.application.genproto.HelloReply;
 import com.application.genproto.HelloRequest;
@@ -25,7 +26,7 @@ public class HelloWorldServer {
         server.blockUntilShutdown();
     }
 
-    private void start() throws IOException {
+    public void start() throws IOException {
         /* The port on which the server should run */
         int port = ServerConstants.PORT;
         server = ServerBuilder.forPort(port)
@@ -48,7 +49,7 @@ public class HelloWorldServer {
         });
     }
 
-    private void stop() throws InterruptedException {
+    public void stop() throws InterruptedException {
         if (server != null) {
             server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
         }
@@ -57,7 +58,7 @@ public class HelloWorldServer {
     /**
      * Await termination on the main thread since the grpc library uses daemon threads.
      */
-    private void blockUntilShutdown() throws InterruptedException {
+    public void blockUntilShutdown() throws InterruptedException {
         if (server != null) {
             server.awaitTermination();
         }
@@ -70,6 +71,7 @@ public class HelloWorldServer {
             HelloReply reply = HelloReply.newBuilder().setMessage(
                     "Hello " + req.getName() + " your age is " + req.getAge()).build();
             System.out.println(reply.toString());
+            PrometheusUtils.getGrpcApi().labels("sayHello", "Success").inc();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
         }
@@ -79,6 +81,7 @@ public class HelloWorldServer {
             HelloReply reply = HelloReply.newBuilder().setMessage(
                     "Hello " + req.getName() + " your age is " + req.getAge()).build();
             System.out.println(reply.toString());
+            PrometheusUtils.getGrpcApi().labels("sayHelloAgain", "Success").inc();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
         }

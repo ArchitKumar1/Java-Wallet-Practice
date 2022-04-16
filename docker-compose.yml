@@ -6,8 +6,10 @@ services:
     build: .
     ports:
       - 8000:8000
+      - 8100:8100
 
   prometheus:
+    user: root
     container_name: prometheus
     image: prom/prometheus:latest
     depends_on:

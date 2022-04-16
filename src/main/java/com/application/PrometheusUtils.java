@@ -14,6 +14,7 @@ public class PrometheusUtils {
     private static final Counter transactionCounter;
 
     private static final Gauge moneyGuage;
+    private static final Counter grpcApi;
 
 
     static {
@@ -30,11 +31,23 @@ public class PrometheusUtils {
                 .register();
     }
 
+    static {
+        grpcApi = Counter
+                .build("api_count", "Live Money")
+                .labelNames("api_name", "status")
+                .register();
+    }
+
+
     public static Counter getTransactionCounter() {
         return transactionCounter;
     }
 
     public static Gauge getMoneyGuage() {
         return moneyGuage;
+    }
+
+    public static Counter getGrpcApi() {
+        return grpcApi;
     }
 }

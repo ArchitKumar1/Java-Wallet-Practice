@@ -10,7 +10,7 @@ COPY build/libs/practice-2-all-1.0-SNAPSHOT.jar /app/application.jar
 
 # COPY jmx_prometheus_javaagent-0.13.0.jar /jmx_prometheus_javaagent-0.13.0.jar
 
-COPY prometheus-jmx-config.yaml /prometheus-jmx-config.yaml
+#COPY prometheus-jmx-config.yaml /prometheus-jmx-config.yaml
 COPY src/main/resources/logback.xml /home
 COPY newrelic/newrelic.yml /app
 COPY newrelic/newrelic.jar /app
