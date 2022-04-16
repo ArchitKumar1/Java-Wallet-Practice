@@ -49,6 +49,9 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.7.7'
     compile 'org.javassist:javassist:3.15.0-GA'
     compile 'mysql:mysql-connector-java:5.1.31'
+//    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.2.1'
+    compile(group: 'org.apache.kafka', name: 'kafka-clients', version: '2.2.1')
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0'
 
 //    // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 //    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.11.1'
@@ -109,32 +112,36 @@ abstract class RunProjectTask extends DefaultTask {
 tasks.register('hello', GreetingTask)
 tasks.register('runProject', RunProjectTask)
 
-sourceSets {
-    main {
-        proto {
-            // In addition to the default 'src/main/proto'
-            srcDir 'proto'
-//            // In addition to the default '**/*.proto' (use with caution).
-//            // Using an extension other than 'proto' is NOT recommended,
-//            // because when proto files are published along with class files, we can
-//            // only tell the type of a file from its extension.
-//            include '**/*.protodevel'
-        }
-    }
-}
 
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.7.0"
-    }
-    plugins {
-        grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.19.0"
-        }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
-    }
-}
+
+// Uncomment to create proto files.
+
+//sourceSets {
+//    main {
+//        proto {
+//            // In addition to the default 'src/main/proto'
+//            srcDir 'proto'
+////            // In addition to the default '**/*.proto' (use with caution).
+////            // Using an extension other than 'proto' is NOT recommended,
+////            // because when proto files are published along with class files, we can
+////            // only tell the type of a file from its extension.
+////            include '**/*.protodevel'
+//        }
+//    }
+//}
+
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.7.0"
+//    }
+//    plugins {
+//        grpc {
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.19.0"
+//        }
+//    }
+//    generateProtoTasks {
+//        all()*.plugins {
+//            grpc {}
+//        }
+//    }
+//}
