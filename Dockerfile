@@ -6,7 +6,7 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/*
 
 # copy the packaged jar file into our docker image
-COPY build/libs/practice-2-all-1.0-SNAPSHOT.jar /app/application.jar
+COPY build/libs/java-practice-all-1.0-SNAPSHOT.jar /app/application.jar
 
 # COPY jmx_prometheus_javaagent-0.13.0.jar /jmx_prometheus_javaagent-0.13.0.jar
 
